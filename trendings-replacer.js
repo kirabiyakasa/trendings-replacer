@@ -4,6 +4,7 @@ let link = 'https://avatars1.githubusercontent.com/u/66184932?s=' +
             '460&u=e7b985fc01bdcb4ddd3e67011e6ff4a40bcf58b1&v=4'
 
 let trending;
+let trendingContainerString = '[aria-label=\"Timeline: Trending now\"]'
 let eventOneCounter = 0;
 let eventTwoCounter = 0;
 let eventThreeCounter;
@@ -14,11 +15,11 @@ chrome.runtime.onMessage.addListener(
     if (request.message === 'url change') {
       eventThreeCounter = 0
       document.addEventListener('DOMSubtreeModified', function(event){
-        if(document.querySelector('[aria-label=\"Timeline: Trending now\"]') &&
+        if(document.querySelector(trendingContainerString) &&
           eventThreeCounter < 1) {
     
           eventThreeCounter++
-          trending = document.querySelector('[aria-label=\"Timeline: Trending now\"]');
+          trending = document.querySelector(trendingContainerString);
           trending.innerHTML = "";
           changeElement()
         }
@@ -31,8 +32,8 @@ function changeElement() {
   eventTwoCounter++
 
   if(status == 'green' &&
-    document.querySelector('[aria-label=\"Timeline: Trending now\"]')) {
-      trending = document.querySelector('[aria-label=\"Timeline: Trending now\"]');
+    document.querySelector(trendingContainerString)) {
+      trending = document.querySelector(trendingContainerString);
       trending.innerHTML =
         `<div style='text-align:center;font-size:19px;color:${fontColor};` + 
         "font-family:Helvetica;padding:10px;" +
@@ -67,9 +68,9 @@ document.addEventListener('DOMSubtreeModified', function(event){
 });
 
 document.addEventListener('DOMSubtreeModified', function(event){
-  if(document.querySelector('[aria-label=\"Timeline: Trending now\"]') &&
+  if(document.querySelector(trendingContainerString) &&
     eventTwoCounter < 1) {
-      trending = document.querySelector('[aria-label=\"Timeline: Trending now\"]');
+      trending = document.querySelector(trendingContainerString);
       trending.innerHTML = "";
       changeElement()
   }
