@@ -3,22 +3,55 @@ let fontColor = "white";
 let link = 'https://avatars1.githubusercontent.com/u/66184932?s=' + 
             '460&u=e7b985fc01bdcb4ddd3e67011e6ff4a40bcf58b1&v=4'
 
+let main;
 let trending;
+let headingParent;
 let trendingContainerString = '[aria-label=\"Timeline: Trending now\"]'
 let eventOneCounter = 0;
 let eventTwoCounter = 0;
-let eventThreeCounter;
+let eventThreeCounter = 0;
+let eventFourCounter;
+
+let mutationObserver = new MutationObserver(callback);
+const mutationObserver2 = new MutationObserver(callback);
+
+function callback(mutationsList) {
+  for (let mutationRecord of mutationsList) {
+    if (mutationRecord.removedNodes) {
+      for (let removedNode of mutationRecord.removedNodes) {
+        if (removedNode.attributes['role']) {
+          // load content on theme change and restore mutation observer
+          if(removedNode.attributes['role'].value === "heading")
+
+          main = document.querySelector('[role=\"main\"]');
+
+          mutationObserver.observe(
+            main,
+            { attributes: true }
+          )
+          changeElement()
+        }
+      }
+    }
+  }
+  // look for changes to content due to window resize
+  mutationsList.forEach(mutation => {
+    if (mutation.attributeName === 'class') {
+      changeElement()
+    }
+  })
+}
 
 chrome.runtime.onMessage.addListener(
   function(request, sender, sendResponse) {
     // listen for messages sent from background.js
     if (request.message === 'url change') {
-      eventThreeCounter = 0
+      eventFourCounter = 0
       document.addEventListener('DOMSubtreeModified', function(event){
         if(document.querySelector(trendingContainerString) &&
-          eventThreeCounter < 1) {
+          eventFourCounter < 1) {
     
-          eventThreeCounter++
+          eventFourCounter++
           trending = document.querySelector(trendingContainerString);
           trending.innerHTML = "";
           changeElement()
@@ -28,6 +61,7 @@ chrome.runtime.onMessage.addListener(
   }
 );
 
+// loads content
 function changeElement() {
   eventTwoCounter++
 
@@ -45,28 +79,35 @@ function changeElement() {
 
 document.addEventListener('DOMSubtreeModified', function(event){
 
+  // reloads content if window is resized
   if(document.querySelector('[role=\"main\"]') && eventOneCounter < 1) {
 
     eventOneCounter++
-    console.log(eventOneCounter)
 
-    function callback(mutationsList) {
-      mutationsList.forEach(mutation => {
-        if (mutation.attributeName === 'class') {
-          changeElement()
-        }
-      }) 
-    } 
-    const mutationObserver = new MutationObserver(callback);
-    let main = document.querySelector('[role=\"main\"]');
+    main = document.querySelector('[role=\"main\"]');
     
     mutationObserver.observe(
       main,
       { attributes: true }
     )
   }
+
+  // observer for detecting theme change
+  else if(document.querySelector('[role=\"heading\"]') &&
+    eventThreeCounter < 1) {
+
+      eventThreeCounter++
+
+      headingParent = document.querySelector('[role=\"heading\"]').parentNode;
+
+      mutationObserver2.observe(
+        headingParent,
+        { childList: true }
+      )
+  }
 });
 
+// loads content on page load
 document.addEventListener('DOMSubtreeModified', function(event){
   if(document.querySelector(trendingContainerString) &&
     eventTwoCounter < 1) {
