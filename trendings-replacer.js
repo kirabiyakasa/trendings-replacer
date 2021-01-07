@@ -1,8 +1,3 @@
-let status = "green"
-let fontColor = "white";
-let link = 'https://avatars1.githubusercontent.com/u/66184932?s=' + 
-            '460&u=e7b985fc01bdcb4ddd3e67011e6ff4a40bcf58b1&v=4'
-
 let main;
 let trending;
 let headingParent;
@@ -11,6 +6,26 @@ let eventOneCounter = 0;
 let eventTwoCounter = 0;
 let eventThreeCounter = 0;
 let eventFourCounter;
+
+let extensionStatus;
+chrome.storage.sync.get('status', function(data) {
+  extensionStatus = data.status
+});
+
+let fontColor;
+chrome.storage.sync.get('color', function(data) {
+  fontColor = data.color
+});
+
+let flavorText;
+chrome.storage.sync.get('text', function(data) {
+  flavorText = data.text
+});
+
+let imageLink;
+chrome.storage.sync.get('image', function(data) {
+  imageLink = data.image
+});
 
 let mutationObserver = new MutationObserver(callback);
 const mutationObserver2 = new MutationObserver(callback);
@@ -65,15 +80,15 @@ chrome.runtime.onMessage.addListener(
 function changeElement() {
   eventTwoCounter++
 
-  if(status == 'green' &&
+  if(extensionStatus == 'green' &&
     document.querySelector(trendingContainerString)) {
       trending = document.querySelector(trendingContainerString);
       trending.innerHTML =
         `<div style='text-align:center;font-size:19px;color:${fontColor};` + 
         "font-family:Helvetica;padding:10px;" +
         "border-bottom:0.5px solid rgb(56, 68, 77);'" + 
-        '><b>My Waifu</b></div>' +
-        '<img src=' + link + ' width=\'384\'>\"'
+        `><b>${flavorText}</b></div>` +
+        '<img src=' + imageLink + ' width=\'384\'>\"'
   };
 }
 
