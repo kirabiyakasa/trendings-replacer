@@ -1,0 +1,80 @@
+button {
+  height: 30px;
+  width: 30px;
+  outline: none;
+  margin: 10px;
+}
+
+body {
+  background-color: lightsteelblue;
+  display: flex;
+  justify-content: center;
+}
+
+.main-container {
+  min-width: 600px;
+  width: 700px;
+  display: block;
+  text-align: center;
+  background-color: mintcream;
+  border-radius: 6px;
+  box-shadow: 2px 2px 6px;
+}
+
+#status-container, #theme-button-container {
+  margin: 10px;
+}
+
+.radio-field-container {
+  display: flex;
+  justify-content: center;
+}
+
+.radio-button-container {
+  margin: 10px;
+}
+
+.radio-label {
+  margin-right: 10px;
+  font-family: Helvetica ;
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.text-label {
+  font-family: Helvetica ;
+  font-weight: bold;
+  font-size: 20px;
+  width: 150px;
+}
+
+#set-flavor-text, #set-image {
+  width: 500px;
+}
+
+.description-container {
+  font-family: sans-serif;
+  font-size: 18px;
+}
+
+#flavor-text-container, #set-image-container {
+  margin: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.text-field-container {
+  display: flex;
+  justify-content: flex-start;
+}
+
+#submit-container {
+  margin: 10px;
+}
+
+#options-submit {
+  font-size: 18px;
+  font-weight: bold;
+  width: 100px;
+  height: 30px;
+}
