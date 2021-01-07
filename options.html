@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="options.css">
+  </head>
+  <body>
+    <div class="main-container">
+      <div id="status-container">
+        <!-- show current status -->
+        <div class="radio-field-container">
+          <div class="radio-button-container">
+            <input type="radio" name="extension-status" value="green">
+            <label class="radio-label">Enable</label>
+          </div>
+
+          <div class="radio-button-container">
+            <input type="radio" name="extension-status" value="red">
+            <label class="radio-label">Disable</label>
+          </div>
+        </div>
+
+        <div class="description-container">
+          <p>Enable or disable the extension.</p>
+        </div>
+      </div>
+      <hr>
+      <div id="theme-button-container">
+        <!-- show current theme -->
+        <div class="radio-field-container">
+          <div class="radio-button-container">
+            <input type="radio" name="twitter-theme" value="#ffffff">
+            <label class="radio-label">Dark</label>
+          </div>
+
+          <div class="radio-button-container">
+            <input type="radio" name="twitter-theme" value="#0f1419">
+            <label class="radio-label">Light</label>
+          </div>
+        </div>
+
+        <div class="description-container">
+          <p>Choose your twitter theme. Selecting Light theme will result in 
+            dark text, and vice versa.</p>
+        </div>
+      </div>
+      <hr>
+      <div id="flavor-text-container">
+        <div class="text-field-container">
+          <div class="text-label">Flavor Text:</div>
+          <!-- prepopulate with text -->
+          <input type="text" id="set-flavor-text">
+        </div>
+
+        <div class="description-container">
+          <p>Enter text which will appear above the image in the container.</p>
+        </div>
+      </div>
+      <hr>
+      <div id="set-image-container">
+        <div class="text-field-container">
+          <div class="text-label">Set Image:</div>
+          <!-- prepopulate with current link -->
+          <input type="url" id="set-image">
+        </div>
+
+        <div class="description-container">
+          <p>Enter image URL to use for the container.</p>
+        </div>
+      </div>
+      <hr>
+      <div id="submit-container">
+        <input type="submit" id="options-submit" value="save">
+      </div>
+    </div>
+  </body>
+  <script src="options.js"></script>
+</html>
