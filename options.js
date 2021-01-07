@@ -16,14 +16,14 @@ chrome.storage.sync.get('status', function(data) {
   }
 });
 chrome.storage.sync.get('color', function(data) {
-  if(data.color === "#ffffff") {
-    console.log("dark")
-    themeRadio[0].checked = true
-    themeRadio[1].checked = false
-  } else {
+  if(data.color === "#0f1419f") {
     console.log("light")
     themeRadio[0].checked = false
     themeRadio[1].checked = true
+  } else {
+    console.log("dark")
+    themeRadio[0].checked = true
+    themeRadio[1].checked = false
   }
 });
 chrome.storage.sync.get('text', function(data) {
@@ -83,6 +83,11 @@ function setFlavorText() {
         console.log('Text is set to ' + flavorTextField.value);
       });
     }
+    else {
+      chrome.storage.sync.set({text: 'Placeholder Text'}, function() {
+        console.log('Text is set to ' + 'Placeholder Text');
+      });
+    }
   })
 };
 
@@ -96,6 +101,11 @@ function setImage() {
     if(imageField.value) {
       chrome.storage.sync.set({image: imageField.value}, function() {
         console.log('Image is set to ' + imageField.value);
+      });
+    }
+    else {
+      chrome.storage.sync.set({image: 'No Image'}, function() {
+        console.log('Image is set to ' + 'No Image');
       });
     }
   })

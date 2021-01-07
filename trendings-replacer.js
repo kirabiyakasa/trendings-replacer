@@ -14,12 +14,19 @@ chrome.storage.sync.get('status', function(data) {
 
 let fontColor;
 chrome.storage.sync.get('color', function(data) {
-  fontColor = data.color
+  if(data.color) {
+    fontColor = data.color
+  }
+  else { // use light font by default
+    fontColor = '#ffffff'
+  }
 });
 
-let flavorText;
+let flavorText = 'Placeholder Text';
 chrome.storage.sync.get('text', function(data) {
-  flavorText = data.text
+  if(data.text) {
+    flavorText = data.text
+  }
 });
 
 let imageLink;
@@ -68,7 +75,6 @@ chrome.runtime.onMessage.addListener(
     
           eventFourCounter++
           trending = document.querySelector(trendingContainerString);
-          trending.innerHTML = "";
           changeElement()
         }
       });
@@ -83,12 +89,21 @@ function changeElement() {
   if(extensionStatus == 'green' &&
     document.querySelector(trendingContainerString)) {
       trending = document.querySelector(trendingContainerString);
+      let imageTag;
+      if(imageLink != 'No Image' && imageLink != undefined) {
+        imageTag = '<img src=' + imageLink + ' width=\'384\'>';
+      }
+      else {
+        imageTag = '<div style="color:red;text-align:center;' +
+        'font-family:Helvetica;font-size:19px">No Image</div>'
+      }
+      trending.innerHTML = "";
       trending.innerHTML =
         `<div style='text-align:center;font-size:19px;color:${fontColor};` + 
         "font-family:Helvetica;padding:10px;" +
         "border-bottom:0.5px solid rgb(56, 68, 77);'" + 
         `><b>${flavorText}</b></div>` +
-        '<img src=' + imageLink + ' width=\'384\'>\"'
+        imageTag
   };
 }
 
@@ -127,7 +142,6 @@ document.addEventListener('DOMSubtreeModified', function(event){
   if(document.querySelector(trendingContainerString) &&
     eventTwoCounter < 1) {
       trending = document.querySelector(trendingContainerString);
-      trending.innerHTML = "";
       changeElement()
   }
 });
