@@ -18,8 +18,8 @@ an image, accompanied by text.
 3. Access the options menu by clicking on the icon, or via your browser's
 extension menu.
 
-4. In the options menu, choose to enable or disable the extension, select your twitter theme for matching text, set the text for the box, and set the
-image url.
+4. In the options menu, choose to enable or disable the extension, select your twitter theme for matching text color, set the text for the content box, and 
+set the image url.
 
 5. When you paste the image URL, be sure to include the entire address, 
 including the "https://, e.g., 

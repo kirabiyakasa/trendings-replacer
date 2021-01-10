@@ -111,9 +111,18 @@ function setImage() {
   })
 };
 
+function updateNotice() {
+  notice = document.querySelector('#update-notice')
+  notice.style.display = 'block'
+  setTimeout(() => {
+    notice.style.display = "none";
+  }, 7000);  
+}
+
 submitButton.addEventListener('click', () => {
   setStatus()
   setColor()
   setFlavorText()
   setImage()
+  updateNotice()
 });
