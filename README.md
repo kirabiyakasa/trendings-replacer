@@ -3,11 +3,13 @@
 # Project Description
 
 This is an extension for Chromium based browsers, such as Chrome and Brave,
-created by request of a friend.
+created at request of a friend.
 The extension replaces the trending or "What's happening" box on Twitter, with
 an image, accompanied by text.
 
 # How to Install
+
+https://chrome.google.com/webstore/detail/trendings-replacer/hlcpdbiljeakkoahfhcehoiandhecghh?hl=en&authuser=2
 
 # How to use
 
